@@ -29,7 +29,7 @@ Transform:
   m_GameObject: {fileID: 2841498550865765758}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 1.1539736, y: -1.7170193, z: 0}
-  m_LocalScale: {x: 0.3, y: 0.3, z: 0.3}
+  m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -76,8 +76,8 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: -2413806693520163455, guid: a86470a33a6bf42c4b3595704624658b, type: 3}
-  m_Color: {r: 0.8207547, g: 0.7827312, b: 0.6078231, a: 1}
+  m_Sprite: {fileID: 21300000, guid: 464bb6dbb76afd549a52aff3b812c1b7, type: 3}
+  m_Color: {r: 0.9245283, g: 0.912899, b: 0.912899, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -139,4 +139,10 @@ MonoBehaviour:
   zombiePrefab: {fileID: 5231579974589865235, guid: 37e9ac883f935cf41bc45f0bac6b8f07, type: 3}
   bounceForce: 50
   humanScanRadius: 2
-  humanRunSpeed: 100
+  humanRunForce: 6
+  maxRunSpeed: 0.5
+  humanWalkForce: 35
+  randomDirectionChangeTime: 5
+  humanNoLongerScaredTime: 25
+  hitsUntilDead: 2
+  woundedSprite: {fileID: 21300000, guid: 8b3448bcca0c13f4fb7aa9d02c337d80, type: 3}

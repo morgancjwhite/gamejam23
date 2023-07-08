@@ -4,9 +4,7 @@ using UnityEngine;
 
 public class ZombieMove : MonoBehaviour
 {
-    private float scale;
     private Rigidbody2D _rigidbody2D;
-    private bool isBouncing;
     private System.Random rnd;
     private float speed;
     private bool followingMouse;
@@ -19,8 +17,6 @@ public class ZombieMove : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        scale = 20f;
-        isBouncing = false;
         _rigidbody2D = GetComponent<Rigidbody2D>();
         rnd = new System.Random();
         speed = (float)rnd.Next((int)speedLowerBound, (int)speedUpperBound) / 100;

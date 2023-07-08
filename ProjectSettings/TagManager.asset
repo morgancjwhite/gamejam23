@@ -5,11 +5,14 @@ TagManager:
   serializedVersion: 2
   tags:
   - zombie
+  - Floor
+  - ProceduralMap
+  - Walls
   layers:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - 
+  - walls
   - Water
   - UI
   - 

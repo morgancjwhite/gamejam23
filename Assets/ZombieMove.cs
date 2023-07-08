@@ -9,8 +9,9 @@ public class ZombieMove : MonoBehaviour
     private bool isBouncing;
     private System.Random rnd;
     private float speed;
+    private bool followingMouse;
 
-
+    [SerializeField] private float conversionFollowDelayMilliseconds;
     [SerializeField] private float speedLowerBound;
     [SerializeField] private float speedUpperBound;
 
@@ -23,36 +24,26 @@ public class ZombieMove : MonoBehaviour
         _rigidbody2D = GetComponent<Rigidbody2D>();
         rnd = new System.Random();
         speed = (float)rnd.Next((int)speedLowerBound, (int)speedUpperBound) / 100;
+        StartCoroutine(DelayMovement());
+    }
+
+    IEnumerator DelayMovement()
+    {
+        yield return new WaitForSeconds(conversionFollowDelayMilliseconds / 1000);
+        followingMouse = true;
     }
 
     // Update is called once per frame
     void Update()
     {
-        // transform.Rotate(1 / scale, 2 / scale, 3 / scale);
-
-        Vector3 moveDirection;
-        moveDirection = Input.mousePosition;
-        moveDirection.z = 0.0f;
-        moveDirection = Camera.main.ScreenToWorldPoint(moveDirection);
-        moveDirection -= transform.position;
-        _rigidbody2D.velocity = new Vector2(moveDirection.x * speed, moveDirection.y * speed);
+        if (followingMouse)
+        {
+            Vector3 moveDirection;
+            moveDirection = Input.mousePosition;
+            moveDirection.z = 0.0f;
+            moveDirection = Camera.main.ScreenToWorldPoint(moveDirection);
+            moveDirection -= transform.position;
+            _rigidbody2D.velocity = new Vector2(moveDirection.x * speed, moveDirection.y * speed);
+        }
     }
-
-    // void OnCollisionEnter2D(Collision2D collision)
-    // {
-        // // get normal angle of collision, add some noise and send flying that way!
-        // float bounce = bounceForce;
-        // Vector2 normalAngle = collision.contacts[0].normal;
-        // int randX = rnd.Next(-5, 5);
-        // int randY = rnd.Next(-5, 5);
-        // Vector2 bounceAngle = new Vector2(randX + normalAngle.x, randY + normalAngle.y);
-        // _rigidbody2D.AddForce(bounceAngle * bounce);
-        // isBouncing = true;
-        // Invoke("StopBounce", boundEndTime);
-    // }
-    //
-    // void StopBounce()
-    // {
-    //     isBouncing = false;
-    // }
 }

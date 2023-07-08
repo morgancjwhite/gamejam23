@@ -9,52 +9,46 @@ public class Human : MonoBehaviour
     [SerializeField] private GameObject zombiePrefab;
     [SerializeField] private float bounceForce;
     [SerializeField] private float humanScanRadius;
+    [SerializeField] private float humanRunSpeed;
+    private bool scaredHuman;
 
 
     // Start is called before the first frame update
     void Start()
     {
+        scaredHuman = false;
     }
 
-
+    //
     // Update is called once per frame
     void Update()
     {
-        CheckZombiesInRadius();
+        if (!scaredHuman)
+        {
+            CheckZombiesInRadius();
+        }
     }
 
     void CheckZombiesInRadius()
     {
-        // Collider[] colliders = Physics.OverlapSphere(transform.position, humanScanRadius);
-        print(transform.position);
-        Collider[] hitColliders = Physics.OverlapSphere(transform.position, 20000000f);
-        if (hitColliders.Length != 0) {print(hitColliders);};
-        foreach (var hitCollider in hitColliders)
+        bool zombieClose = false;
+        foreach (GameObject zombie in GameObject.FindGameObjectsWithTag("zombie"))
         {
-            hitCollider.SendMessage("AddDamage");
+            if (Vector3.Distance(zombie.transform.transform.position, gameObject.transform.position) < humanScanRadius)
+            {
+                RunAway(zombie);
+                scaredHuman = true;
+            }
         }
-        // Vector2 avgPos;
-        // if (colliders.Length > 0)
-        // {
-        //     var totalX = 0f;
-        //     var totalY = 0f;
-        //     foreach (Collider zombie in colliders)
-        //     {
-        //         totalX += zombie.transform.position.x;
-        //         totalY += zombie.transform.position.y;
-        //     }
-        //
-        //     var numZombies = Enumerable.Count(colliders);
-        //     print(numZombies);
-        //     
-        //     avgPos = new Vector2(totalX / numZombies, totalY / numZombies);
-        //     print(avgPos);
-        //     MoveZombieAway(avgPos);
-        // }
     }
 
-    void MoveZombieAway(Vector2 avgPos)
+    public void RunAway(GameObject zombie)
     {
+        print("run away");
+        print(zombie.transform.position);
+        float angle = Vector3.Angle(zombie.transform.position, transform.position);
+        Ray ray = new Ray(zombie.transform.position, transform.position - zombie.transform.position);
+        gameObject.GetComponent<Rigidbody2D>().AddForce(ray.direction * humanRunSpeed);
     }
 
 
@@ -62,6 +56,7 @@ public class Human : MonoBehaviour
     {
         if (collision.collider.gameObject.name.Contains("Zombie"))
         {
+            print("inside collision");
             GameObject zombie = Instantiate(zombiePrefab, transform.position, Quaternion.Euler(0, 0, 0));
             float bounce = bounceForce;
             Vector2 normalAngle = collision.contacts[0].normal;

@@ -137,5 +137,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   zombiePrefab: {fileID: 5231579974589865235, guid: 37e9ac883f935cf41bc45f0bac6b8f07, type: 3}
-  bounceForce: 500
-  humanScanRadius: 500
+  bounceForce: 50
+  humanScanRadius: 2
+  humanRunSpeed: 100

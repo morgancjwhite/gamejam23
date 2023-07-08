@@ -139,10 +139,10 @@ MonoBehaviour:
   zombiePrefab: {fileID: 5231579974589865235, guid: 37e9ac883f935cf41bc45f0bac6b8f07, type: 3}
   bounceForce: 50
   humanScanRadius: 2
-  humanRunForce: 6
-  maxRunSpeed: 0.5
-  humanWalkForce: 35
   randomDirectionChangeTime: 5
+  maxRunSpeed: 10
+  humanRunForce: 6
   humanNoLongerScaredTime: 25
-  hitsUntilDead: 2
+  hitsUntilDeadHuman: 2
   woundedSprite: {fileID: 21300000, guid: 8b3448bcca0c13f4fb7aa9d02c337d80, type: 3}
+  humanWalkForceHuman: 35

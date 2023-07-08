@@ -1,39 +1,32 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using System.Linq;
-using UnityEditor.UI;
 using UnityEngine;
-using Enumerable = System.Linq.Enumerable;
 
-public class Human : MonoBehaviour
+public class HumanBase : MonoBehaviour
 {
-    [SerializeField] private GameObject zombiePrefab;
-    [SerializeField] private float bounceForce;
-    [SerializeField] private float humanScanRadius;
-    [SerializeField] private float humanRunForce;
-    [SerializeField] private float maxRunSpeed;
-    [SerializeField] private float humanWalkForce;
-    [SerializeField] private int randomDirectionChangeTime;
-    [SerializeField] private int humanNoLongerScaredTime;
-    [SerializeField] private int hitsUntilDead;
-    [SerializeField] private Sprite woundedSprite;
+    public GameObject zombiePrefab;
+    public float bounceForce;
+    public float humanScanRadius;
+    [NonSerialized] public float humanWalkForce;
+    public int randomDirectionChangeTime;
+    public int maxRunSpeed;
+    [NonSerialized] public int hitsUntilDead;
+    [NonSerialized] public Sprite woundedSprite1;
+    [NonSerialized] public Sprite woundedSprite2;
 
 
-    private bool scaredHuman;
     private List<Vector2> cardinalDirections;
     private System.Random rnd;
     private int timeHitByZombie;
     private bool invincible;
-    private Rigidbody2D rb;
+    [NonSerialized] public Rigidbody2D rb;
 
 
     // Start is called before the first frame update
-    void Start()
+    public void Start()
     {
-        scaredHuman = false;
         rnd = new System.Random();
-
         cardinalDirections = new List<Vector2>();
         cardinalDirections.Add(new Vector2(1, 0));
         cardinalDirections.Add(new Vector2(0, 1));
@@ -43,14 +36,18 @@ public class Human : MonoBehaviour
         InvokeRepeating("WalkAround", 0f, (float)repeatTime / 1000);
         timeHitByZombie = 0;
         invincible = false;
-        rb = gameObject.GetComponent<Rigidbody2D>();
         rb.freezeRotation = true;
     }
 
     void Update()
     {
         CheckZombiesInRadius();
-        rb.velocity = new Vector2(Math.Min(rb.velocity.x, maxRunSpeed), Math.Min(rb.velocity.y, maxRunSpeed));
+        if(rb.velocity.sqrMagnitude > maxRunSpeed)
+        {
+            //smoothness of the slowdown is controlled by the 0.99f, 
+            //0.5f is less smooth, 0.9999f is more smooth
+            rb.velocity *= 0.85f;
+        }
     }
 
     void WalkAround()
@@ -61,12 +58,11 @@ public class Human : MonoBehaviour
         rb.AddForce(walkDirection * humanWalkForce);
     }
 
-
-    void ReactToZombie(GameObject zombie)
+    protected virtual void ReactToZombie(GameObject zombie)
     {
-        // to be implemented by child classes
+        //to be overriden
     }
-    
+
     void CheckZombiesInRadius()
     {
         foreach (GameObject zombie in GameObject.FindGameObjectsWithTag("zombie"))
@@ -86,7 +82,6 @@ public class Human : MonoBehaviour
     }
 
 
-
     void OnCollisionEnter2D(Collision2D collision)
     {
         if (!invincible && collision.collider.gameObject.name.Contains("Zombie"))
@@ -96,7 +91,16 @@ public class Human : MonoBehaviour
             StartCoroutine(ResetInvincibleStatus());
             Vector2 normalAngle = collision.contacts[0].normal;
             rb.AddForce(normalAngle * bounceForce);
-            gameObject.GetComponent<SpriteRenderer>().sprite = woundedSprite;
+            if (timeHitByZombie == 1)
+            {
+                gameObject.GetComponent<SpriteRenderer>().sprite = woundedSprite1;
+            }
+
+            if (timeHitByZombie == 2)
+            {
+                gameObject.GetComponent<SpriteRenderer>().sprite = woundedSprite2;
+            }
+
             if (timeHitByZombie >= hitsUntilDead)
             {
                 Instantiate(zombiePrefab, transform.position, Quaternion.identity);

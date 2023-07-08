@@ -6,7 +6,7 @@ public class ZombieMove : MonoBehaviour
 {
     private Rigidbody2D _rigidbody2D;
     private System.Random rnd;
-    private float speed;
+    [System.NonSerialized] public float speed;
     private bool followingMouse;
 
     [SerializeField] private float conversionFollowDelayMilliseconds;

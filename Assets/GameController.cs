@@ -28,13 +28,15 @@ public class GameController : MonoBehaviour
 
     void SpawnMobs()
     {
-        Instantiate(zombiePrefab, new Vector3(0, 0, -1), Quaternion.identity);
+        GameObject startZombie = Instantiate(zombiePrefab, new Vector3(0, 0, -1), Quaternion.identity);
+        startZombie.GetComponent<ZombieMove>().speed = 1.5f;
         for (int i = 1; i <= numHumans; i++)
         {
             int rndX = rnd.Next(-humanSpawnRangeHorizontal, humanSpawnRangeHorizontal);
             int rndY = rnd.Next(-humanSpawnRangeVertical, humanSpawnRangeVertical);
             Instantiate(humanPrefab, new Vector3(rndX, rndY, -1), Quaternion.identity);
         }
+
         for (int i = 1; i <= numPolice; i++)
         {
             int rndX = rnd.Next(-humanSpawnRangeHorizontal, humanSpawnRangeHorizontal);

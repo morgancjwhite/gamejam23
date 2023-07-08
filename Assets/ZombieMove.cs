@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using UnityEngine;
 
@@ -5,7 +6,7 @@ public class ZombieMove : MonoBehaviour
 {
     private Rigidbody2D _rigidbody2D;
     private System.Random rnd;
-    [System.NonSerialized] public float speed;
+    [NonSerialized] public float speed;
     private bool followingMouse;
     private GameController gameController;
 
@@ -34,7 +35,7 @@ public class ZombieMove : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (followingMouse)
+        if (followingMouse && Input.GetMouseButton(0))
         {
             Vector3 moveDirection;
             moveDirection = Input.mousePosition;

@@ -1,15 +1,12 @@
-using System.Collections;
-using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
-using UnityEngine.UI;
 
 public class Timer : MonoBehaviour
 {
-    public float timeRemaining = 10;
     public bool timerIsRunning;
     private TextMeshProUGUI textComponent;
     private GameController gameController;
+    private float timeToNuke;
 
     private void Start()
     {
@@ -17,21 +14,22 @@ public class Timer : MonoBehaviour
         gameController = GameObject.Find("GameController").GetComponent<GameController>();
         // Starts the timer automatically
         timerIsRunning = true;
+        timeToNuke = gameController.timeToNuke;
     }
 
     void Update()
     {
         if (timerIsRunning)
         {
-            if (timeRemaining > 0)
+            if (timeToNuke > 0)
             {
-                timeRemaining -= Time.deltaTime;
-                DisplayTime(timeRemaining);
+                timeToNuke -= Time.deltaTime;
+                DisplayTime(timeToNuke);
             }
             else
             {
                 print("Time has run out!");
-                timeRemaining = 0;
+                timeToNuke = 0;
                 timerIsRunning = false;
                 gameController.Nuke();
             }

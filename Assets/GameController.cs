@@ -15,6 +15,8 @@ public class GameController : MonoBehaviour
     private int humanSpawnRangeVertical;
     [NonSerialized] public int zombieCount;
     public GameObject nuke;
+    [SerializeField] private int mapSize; // this is a guess, for spawning mobs
+    public int timeToNuke;
 
     void Start()
     {
@@ -39,11 +41,24 @@ public class GameController : MonoBehaviour
     {
         for (int i = 1; i < numMobs; i++)
         {
-            int rndX = rnd.Next(-humanSpawnRangeHorizontal, humanSpawnRangeHorizontal);
-            int rndY = rnd.Next(-humanSpawnRangeVertical, humanSpawnRangeVertical);
+            // TODO want mobs to spawn outside of human spawn range
+            int rndX = rnd.Next(-mapSize, mapSize);
+            int rndY = rnd.Next(-mapSize, mapSize);
             GameObject mob = Instantiate(prefab, new Vector3(rndX, rndY, -1), Quaternion.identity);
             StartCoroutine(WaitForMobToLoad(mob));
         }
+    }
+
+    private void SpawnCycleHumans()
+    {
+        // every 4 seconds
+        SpawnHumanBaseMobs(humanPrefab, 3);
+    }
+
+    private void SpawnCyclePolice()
+    {
+        // every 6 seconds
+        SpawnHumanBaseMobs(policePrefab, 2);
     }
 
     void SpawnEntities()
@@ -52,6 +67,8 @@ public class GameController : MonoBehaviour
         startZombie.GetComponent<ZombieMove>().speed = 1.5f;
         SpawnHumanBaseMobs(humanPrefab, numHumans);
         SpawnHumanBaseMobs(policePrefab, numPolice);
+        InvokeRepeating("SpawnCycleHumans", 3f, 4f);
+        InvokeRepeating("SpawnCyclePolice", 3f, 6f);
     }
 
     private void QuitGame()

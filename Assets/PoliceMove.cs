@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 
 public class PoliceMove : HumanBase
@@ -31,18 +32,28 @@ public class PoliceMove : HumanBase
             CancelInvoke(nameof(WalkAround));
             InvokeRepeating(nameof(ShootZombie), initialShootDelay, repeatingShootDelay);
             foundZombie = true;
+            StartCoroutine(ResetFoundZombieStatus());
             // add time after which it stops shooting?
         }
         // if zombie dies then?
+    }
+
+    IEnumerator ResetFoundZombieStatus()
+    {
+        yield return new WaitForSeconds(3f);
+        foundZombie = false;
+        CancelInvoke(nameof(ShootZombie));
     }
 
     void ShootZombie()
     {
         if (zombieShootingAt != null)
         {
-            Vector3 bulletStartPosition = Vector3.Lerp(transform.position, zombieShootingAt.transform.position, 0.2f);
+            float lerpScale = 0.5f / Vector3.Distance(transform.position, zombieShootingAt.transform.position);
+            Vector3 bulletStartPosition = Vector3.Lerp(transform.position, zombieShootingAt.transform.position, lerpScale);
             GameObject bullet = Instantiate(bulletPrefab, bulletStartPosition, Quaternion.identity);
             bullet.GetComponent<Bullet>().target = zombieShootingAt;
+            bullet.GetComponent<Bullet>().originPolice = gameObject;
         }
     }
 }

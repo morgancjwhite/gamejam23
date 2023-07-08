@@ -42,7 +42,7 @@ public class HumanBase : MonoBehaviour
     void Update()
     {
         CheckZombiesInRadius();
-        if(rb.velocity.sqrMagnitude > maxSpeed)
+        if (rb.velocity.sqrMagnitude > maxSpeed)
         {
             //smoothness of the slowdown is controlled by the 0.99f, 
             //0.5f is less smooth, 0.9999f is more smooth
@@ -81,8 +81,7 @@ public class HumanBase : MonoBehaviour
         invincible = false;
     }
 
-
-    void OnCollisionEnter2D(Collision2D collision)
+    void HandleCollision(Collision2D collision)
     {
         if (!invincible && collision.collider.gameObject.name.Contains("Zombie"))
         {
@@ -107,5 +106,15 @@ public class HumanBase : MonoBehaviour
                 Destroy(gameObject);
             }
         }
+    }
+
+    void OnCollisionEnter2D(Collision2D collision)
+    {
+        HandleCollision(collision);
+    }
+
+    private void OnCollisionStay2D(Collision2D collision)
+    {
+        HandleCollision(collision);
     }
 }

@@ -5,6 +5,7 @@ public class Bullet : MonoBehaviour
 {
     [SerializeField] private float bulletSpeed;
     [NonSerialized] public GameObject target;
+    [NonSerialized] public GameObject originPolice;
     private GameController gameController;
 
 
@@ -26,8 +27,12 @@ public class Bullet : MonoBehaviour
         }
         else if (collision.gameObject.name.Contains("Human") || collision.gameObject.name.Contains("Police"))
         {
-            Destroy(collision.gameObject);
+            if (collision.gameObject != originPolice)
+            {
+                Destroy(collision.gameObject);
+            }
         }
+
         Destroy(gameObject);
     }
 }

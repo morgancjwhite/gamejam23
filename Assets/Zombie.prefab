@@ -137,5 +137,5 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   conversionFollowDelayMilliseconds: 200
-  speedLowerBound: 50
-  speedUpperBound: 150
+  speedLowerBound: 75
+  speedUpperBound: 125

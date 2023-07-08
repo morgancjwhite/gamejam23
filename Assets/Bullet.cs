@@ -23,11 +23,11 @@ public class Bullet : MonoBehaviour
             gameController.zombieCount--;
             // TODO spawn blood splatter 
             Destroy(collision.gameObject);
-            Destroy(gameObject);
         }
-        else
+        else if (collision.gameObject.name.Contains("Human") || collision.gameObject.name.Contains("Police"))
         {
-            Destroy(gameObject);
+            Destroy(collision.gameObject);
         }
+        Destroy(gameObject);
     }
 }

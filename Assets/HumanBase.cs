@@ -50,7 +50,7 @@ public class HumanBase : MonoBehaviour
         }
     }
 
-    void WalkAround()
+    public void WalkAround()
     {
         rb.velocity = new Vector3(0, 0, 0);
         int index = rnd.Next(cardinalDirections.Count);

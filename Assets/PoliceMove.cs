@@ -13,7 +13,7 @@ public class PoliceMove : HumanBase
     private bool foundZombie;
 
 
-    private void Start()
+    private new void Start()
     {
         hitsUntilDead = hitsUntilDeadPolice;
         woundedSprite1 = woundedSprite1Police;
@@ -28,8 +28,8 @@ public class PoliceMove : HumanBase
         zombieShootingAt = zombie;
         if (!foundZombie)
         {
-            CancelInvoke("WalkAround");
-            InvokeRepeating("ShootZombie", initialShootDelay, repeatingShootDelay);
+            CancelInvoke(nameof(WalkAround));
+            InvokeRepeating(nameof(ShootZombie), initialShootDelay, repeatingShootDelay);
             foundZombie = true;
             // add time after which it stops shooting?
         }

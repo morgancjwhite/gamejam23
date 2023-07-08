@@ -7,7 +7,7 @@ public class Human : HumanBase
     [SerializeField] private int hitsUntilDeadHuman;
     [SerializeField] private Sprite woundedSprite;
 
-    void Start()
+    new void Start()
     {
         hitsUntilDead = hitsUntilDeadHuman;
         woundedSprite1 = woundedSprite;
@@ -20,7 +20,7 @@ public class Human : HumanBase
     {
         RunAway(zombie);
         CancelInvoke();
-        InvokeRepeating("WalkAround", humanNoLongerScaredTime, base.randomDirectionChangeTime);
+        InvokeRepeating("WalkAround", humanNoLongerScaredTime, randomDirectionChangeTime);
     }
 
 

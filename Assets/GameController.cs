@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using UnityEngine;
 
 public class GameController : MonoBehaviour
@@ -13,6 +14,7 @@ public class GameController : MonoBehaviour
     private int humanSpawnRangeHorizontal;
     private int humanSpawnRangeVertical;
     [NonSerialized] public int zombieCount;
+    public GameObject nuke;
 
     void Start()
     {
@@ -20,26 +22,36 @@ public class GameController : MonoBehaviour
         humanSpawnRangeVertical = 8;
         humanSpawnRangeHorizontal = 15;
         zombieCount = 0;
-        SpawnMobs();
+        SpawnEntities();
+        nuke.GetComponent<SpriteRenderer>().enabled = false;
     }
 
-    void SpawnMobs()
+    IEnumerator WaitForMobToLoad(GameObject mob)
+    {
+        yield return new WaitUntil(() => mob.GetComponent<HumanBase>().updating);
+        if (mob.GetComponent<HumanBase>().spawnCollide)
+        {
+            Destroy(mob);
+        }
+    }
+
+    void SpawnHumanBaseMobs(GameObject prefab, int numMobs)
+    {
+        for (int i = 1; i < numMobs; i++)
+        {
+            int rndX = rnd.Next(-humanSpawnRangeHorizontal, humanSpawnRangeHorizontal);
+            int rndY = rnd.Next(-humanSpawnRangeVertical, humanSpawnRangeVertical);
+            GameObject mob = Instantiate(prefab, new Vector3(rndX, rndY, -1), Quaternion.identity);
+            StartCoroutine(WaitForMobToLoad(mob));
+        }
+    }
+
+    void SpawnEntities()
     {
         GameObject startZombie = Instantiate(zombiePrefab, new Vector3(0, 0, -1), Quaternion.identity);
         startZombie.GetComponent<ZombieMove>().speed = 1.5f;
-        for (int i = 1; i <= numHumans; i++)
-        {
-            int rndX = rnd.Next(-humanSpawnRangeHorizontal, humanSpawnRangeHorizontal);
-            int rndY = rnd.Next(-humanSpawnRangeVertical, humanSpawnRangeVertical);
-            Instantiate(humanPrefab, new Vector3(rndX, rndY, -1), Quaternion.identity);
-        }
-
-        for (int i = 1; i <= numPolice; i++)
-        {
-            int rndX = rnd.Next(-humanSpawnRangeHorizontal, humanSpawnRangeHorizontal);
-            int rndY = rnd.Next(-humanSpawnRangeVertical, humanSpawnRangeVertical);
-            Instantiate(policePrefab, new Vector3(rndX, rndY, -1), Quaternion.identity);
-        }
+        SpawnHumanBaseMobs(humanPrefab, numHumans);
+        SpawnHumanBaseMobs(policePrefab, numPolice);
     }
 
     private void QuitGame()
@@ -63,5 +75,22 @@ public class GameController : MonoBehaviour
         {
             QuitGame();
         }
+    }
+
+    IEnumerator DelayQuit(float seconds)
+    {
+        print("start delay, see nuke?");
+        yield return new WaitForSeconds(seconds);
+        print("delay finished");
+        QuitGame();
+    }
+
+    public void Nuke()
+    {
+        print("nuke called");
+        nuke.GetComponent<SpriteRenderer>().enabled = true;
+        GameObject camera = GameObject.Find("Main Camera");
+        nuke.transform.position = new Vector3(camera.transform.position.x, camera.transform.position.y, -8);
+        StartCoroutine(DelayQuit(3f));
     }
 }

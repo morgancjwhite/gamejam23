@@ -21,6 +21,8 @@ public class HumanBase : MonoBehaviour
     private int timeHitByZombie;
     private bool invincible;
     [NonSerialized] public Rigidbody2D rb;
+    [NonSerialized] public bool spawnCollide;
+    [NonSerialized] public bool updating;
 
 
     // Start is called before the first frame update
@@ -37,6 +39,7 @@ public class HumanBase : MonoBehaviour
         timeHitByZombie = 0;
         invincible = false;
         rb.freezeRotation = true;
+        updating = false;
     }
 
     void Update()
@@ -48,6 +51,8 @@ public class HumanBase : MonoBehaviour
             //0.5f is less smooth, 0.9999f is more smooth
             rb.velocity *= 0.85f;
         }
+
+        updating = true;
     }
 
     public void WalkAround()
@@ -110,11 +115,13 @@ public class HumanBase : MonoBehaviour
 
     void OnCollisionEnter2D(Collision2D collision)
     {
+        spawnCollide = true;
         HandleCollision(collision);
     }
 
     private void OnCollisionStay2D(Collision2D collision)
     {
+        spawnCollide = true;
         HandleCollision(collision);
     }
 }

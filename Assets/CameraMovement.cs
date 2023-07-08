@@ -6,9 +6,6 @@ public class CameraMovement : MonoBehaviour
     [SerializeField] private float scrollWidthHorizontal;
     [SerializeField] private float scrollWidthVertical;
 
-    private void Start()
-    {
-    }
 
     // Update is called once per frame
     void Update()

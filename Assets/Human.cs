@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 public class Human : HumanBase
@@ -27,6 +28,6 @@ public class Human : HumanBase
     public void RunAway(GameObject zombie)
     {
         Ray ray = new Ray(zombie.transform.position, transform.position - zombie.transform.position);
-        rb.velocity =  ray.direction * humanRunForce;
+        rb.velocity = ray.direction * humanRunForce;
     }
 }

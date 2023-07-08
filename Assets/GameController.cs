@@ -1,11 +1,8 @@
-using System.Collections;
-using System.Collections.Generic;
+using System;
 using UnityEngine;
 
 public class GameController : MonoBehaviour
 {
-    [System.NonSerialized] public string state;
-
     // public GameObject opacity;
     [SerializeField] private GameObject zombiePrefab;
     [SerializeField] public GameObject humanPrefab;
@@ -15,14 +12,14 @@ public class GameController : MonoBehaviour
     private System.Random rnd;
     private int humanSpawnRangeHorizontal;
     private int humanSpawnRangeVertical;
+    [NonSerialized] public int zombieCount;
 
     void Start()
     {
-        state = "start";
         rnd = new System.Random();
         humanSpawnRangeVertical = 8;
         humanSpawnRangeHorizontal = 15;
-
+        zombieCount = 0;
         SpawnMobs();
     }
 
@@ -45,11 +42,26 @@ public class GameController : MonoBehaviour
         }
     }
 
+    private void QuitGame()
+    {
+#if UNITY_STANDALONE
+        Application.Quit();
+#endif
+#if UNITY_EDITOR
+        UnityEditor.EditorApplication.isPlaying = false;
+#endif
+    }
+
     void Update()
     {
         if (Input.GetKeyDown("escape"))
         {
-            Application.Quit();
+            QuitGame();
+        }
+
+        if (zombieCount == 0)
+        {
+            QuitGame();
         }
     }
 }

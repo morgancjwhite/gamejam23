@@ -1,5 +1,4 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class ZombieMove : MonoBehaviour
@@ -8,6 +7,7 @@ public class ZombieMove : MonoBehaviour
     private System.Random rnd;
     [System.NonSerialized] public float speed;
     private bool followingMouse;
+    private GameController gameController;
 
     [SerializeField] private float conversionFollowDelayMilliseconds;
     [SerializeField] private float speedLowerBound;
@@ -17,6 +17,8 @@ public class ZombieMove : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        gameController = GameObject.Find("GameController").GetComponent<GameController>();
+        gameController.zombieCount++;
         _rigidbody2D = GetComponent<Rigidbody2D>();
         rnd = new System.Random();
         speed = (float)rnd.Next((int)speedLowerBound, (int)speedUpperBound) / 100;

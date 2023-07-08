@@ -8,9 +8,9 @@ public class HumanBase : MonoBehaviour
     public GameObject zombiePrefab;
     public float bounceForce;
     public float humanScanRadius;
-    [NonSerialized] public float humanWalkForce;
+    public float humanWalkForce;
     public int randomDirectionChangeTime;
-    public int maxRunSpeed;
+    public int maxSpeed;
     [NonSerialized] public int hitsUntilDead;
     [NonSerialized] public Sprite woundedSprite1;
     [NonSerialized] public Sprite woundedSprite2;
@@ -42,7 +42,7 @@ public class HumanBase : MonoBehaviour
     void Update()
     {
         CheckZombiesInRadius();
-        if(rb.velocity.sqrMagnitude > maxRunSpeed)
+        if(rb.velocity.sqrMagnitude > maxSpeed)
         {
             //smoothness of the slowdown is controlled by the 0.99f, 
             //0.5f is less smooth, 0.9999f is more smooth

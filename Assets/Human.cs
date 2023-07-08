@@ -6,7 +6,6 @@ public class Human : HumanBase
     [SerializeField] private int humanNoLongerScaredTime;
     [SerializeField] private int hitsUntilDeadHuman;
     [SerializeField] private Sprite woundedSprite;
-    [SerializeField] private int humanWalkForceHuman;
 
     void Start()
     {
@@ -14,7 +13,6 @@ public class Human : HumanBase
         woundedSprite1 = woundedSprite;
         woundedSprite2 = woundedSprite;
         rb = gameObject.GetComponent<Rigidbody2D>();
-        humanWalkForce = humanWalkForceHuman;
         base.Start();
     }
 

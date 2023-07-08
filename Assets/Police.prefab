@@ -59,5 +59,39 @@ PrefabInstance:
       propertyPath: m_Name
       value: Police
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    - target: {fileID: 2841498550865765759, guid: b2372f13e140d204a970850858655788, type: 3}
+      propertyPath: m_IsTrigger
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents:
+    - {fileID: 2841498550865765755, guid: b2372f13e140d204a970850858655788, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: b2372f13e140d204a970850858655788, type: 3}
+--- !u!1 &5719845038590406840 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2841498550865765758, guid: b2372f13e140d204a970850858655788, type: 3}
+  m_PrefabInstance: {fileID: 7498492423494047174}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &701544703915410095
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5719845038590406840}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 063cb2bb97a24c144a6767f67a2beb36, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  zombiePrefab: {fileID: 5231579974589865235, guid: 37e9ac883f935cf41bc45f0bac6b8f07, type: 3}
+  bounceForce: 50
+  humanScanRadius: 4
+  humanWalkForce: 35
+  randomDirectionChangeTime: 5
+  maxSpeed: 10
+  initialShootDelay: 0.3
+  repeatingShootDelay: 0.8
+  bulletPrefab: {fileID: 8239148300335702792, guid: 12d8835ea261e604d834ceef0263f5cd, type: 3}
+  hitsUntilDeadPolice: 3
+  woundedSprite1Police: {fileID: 21300000, guid: 9fc1605df951d2140a5872d0fb06c6eb, type: 3}
+  woundedSprite2Police: {fileID: 21300000, guid: db86a9a4603358f48bfe5d61280af178, type: 3}

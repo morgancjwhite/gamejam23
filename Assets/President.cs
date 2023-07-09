@@ -23,6 +23,12 @@ public class President : HumanBase
         base.Start();
         foundZombie = false;
         CancelInvoke("WalkAround");
+        InvokeRepeating(nameof(ShowLine), 5, 5);
+    }
+
+    private void ShowLine()
+    {
+        _chatBubbleHandler.ShowText(transform.position, "president");
     }
 
     protected override void ReactToZombie(GameObject zombie)
@@ -30,7 +36,6 @@ public class President : HumanBase
         zombieShootingAt = zombie;
         if (!foundZombie)
         {
-            _chatBubbleHandler.ShowText(transform.position, "enemy");
             humanWalkForce *= 2;
             randomDirectionChangeTime /= 2;
             InvokeRepeating(nameof(ShootZombie), initialShootDelay, repeatingShootDelay);

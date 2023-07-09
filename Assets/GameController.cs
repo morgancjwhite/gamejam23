@@ -17,6 +17,8 @@ public class GameController : MonoBehaviour
     public GameObject nuke;
     [SerializeField] private int mapSize; // this is a guess, for spawning mobs
     public int timeToNuke;
+    [NonSerialized] public ChatBubbleHandler chatBubbleHandler;
+
 
     void Start()
     {
@@ -26,6 +28,8 @@ public class GameController : MonoBehaviour
         zombieCount = 0;
         SpawnEntities();
         nuke.GetComponent<SpriteRenderer>().enabled = false;
+        chatBubbleHandler = gameObject.GetComponent<ChatBubbleHandler>();
+        chatBubbleHandler.ShowText(new Vector3(3, 3), "");
     }
 
     IEnumerator WaitForMobToLoad(GameObject mob)

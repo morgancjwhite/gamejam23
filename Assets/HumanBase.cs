@@ -35,7 +35,7 @@ public class HumanBase : MonoBehaviour
         cardinalDirections.Add(new Vector2(-1, 0));
         cardinalDirections.Add(new Vector2(0, -1));
         int repeatTime = rnd.Next(2 * 1000, randomDirectionChangeTime * 1000);
-        InvokeRepeating("WalkAround", 0f, (float)repeatTime / 1000);
+            InvokeRepeating("WalkAround", 0f, (float)repeatTime / 1000);
         timeHitByZombie = 0;
         invincible = false;
         rb.freezeRotation = true;
@@ -88,7 +88,7 @@ public class HumanBase : MonoBehaviour
 
     void HandleCollision(Collision2D collision)
     {
-        if (!invincible && collision.collider.gameObject.name.Contains("Zombie"))
+        if (collision != null &&!invincible && collision.collider.gameObject.name.Contains("Zombie"))
         {
             timeHitByZombie++;
             invincible = true;

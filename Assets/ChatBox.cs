@@ -8,38 +8,25 @@ public class ChatBox : MonoBehaviour
 {
     public string textToShow;
     private TextMeshPro textComponent;
-    private GameObject background;
-    private bool isLoaded;
+    private float boxMoveSpeed = 0.001f;
 
     // Start is called before the first frame update
     void Start()
     {
         textComponent = gameObject.GetComponentInChildren<TextMeshPro>();
-        background = gameObject.GetComponentInChildren<SpriteRenderer>().gameObject;
         StartCoroutine(DelayDie());
-        isLoaded = false;
     }
 
     // Update is called once per frame
     void Update()
     {
         textComponent.text = textToShow;
-        if (textToShow != null && !isLoaded)
-        {
-            float scale = (float)textToShow.Length / 10;
-            background.transform.localScale = new Vector3(scale, 0.8f, 1f);
-            float xOffset = textToShow.Length;
-            print(transform.position.x);
-            print(xOffset);
-            print(scale);
-            background.transform.localPosition = new Vector3(transform.position.x + xOffset, transform.position.y, transform.position.z); ;
-            isLoaded = true;
-        }
+        transform.position = new Vector3(transform.position.x, transform.position.y + boxMoveSpeed);
     }
 
     IEnumerator DelayDie()
     {
-        yield return new WaitForSeconds(3);
+        yield return new WaitForSeconds(4);
         Destroy(gameObject);
     }
 }

@@ -24,6 +24,8 @@ public class HumanBase : MonoBehaviour
     [NonSerialized] public bool spawnCollide;
     [NonSerialized] public bool updating;
 
+    [NonSerialized] public ChatBubbleHandler _chatBubbleHandler;
+
 
     // Start is called before the first frame update
     public void Start()
@@ -35,11 +37,12 @@ public class HumanBase : MonoBehaviour
         cardinalDirections.Add(new Vector2(-1, 0));
         cardinalDirections.Add(new Vector2(0, -1));
         int repeatTime = rnd.Next(2 * 1000, randomDirectionChangeTime * 1000);
-            InvokeRepeating("WalkAround", 0f, (float)repeatTime / 1000);
+        InvokeRepeating("WalkAround", 0f, (float)repeatTime / 1000);
         timeHitByZombie = 0;
         invincible = false;
         rb.freezeRotation = true;
         updating = false;
+        _chatBubbleHandler = GameObject.Find("GameController").GetComponent<ChatBubbleHandler>();
     }
 
     void Update()
@@ -86,14 +89,30 @@ public class HumanBase : MonoBehaviour
         invincible = false;
     }
 
+    void BecomeZombie()
+    {
+        if (rnd.Next(4) == 0)
+        {
+            _chatBubbleHandler.ShowText(transform.position, "zombie");
+        }
+
+        Instantiate(zombiePrefab, transform.position, Quaternion.identity);
+        Destroy(gameObject);
+    }
+
     void HandleCollision(Collision2D collision)
     {
-        if (collision != null &&!invincible && collision.collider.gameObject.name.Contains("Zombie"))
+        if (collision != null && !invincible && collision.collider.gameObject.name.Contains("Zombie"))
         {
             timeHitByZombie++;
             invincible = true;
             StartCoroutine(ResetInvincibleStatus());
             Vector2 normalAngle = collision.contacts[0].normal;
+            if (rb == null)
+            {
+                return;
+            }
+
             rb.AddForce(normalAngle * bounceForce);
             if (timeHitByZombie == 1)
             {
@@ -107,8 +126,7 @@ public class HumanBase : MonoBehaviour
 
             if (timeHitByZombie >= hitsUntilDead)
             {
-                Instantiate(zombiePrefab, transform.position, Quaternion.identity);
-                Destroy(gameObject);
+                BecomeZombie();
             }
         }
     }

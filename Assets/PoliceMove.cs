@@ -29,6 +29,7 @@ public class PoliceMove : HumanBase
         zombieShootingAt = zombie;
         if (!foundZombie)
         {
+            _chatBubbleHandler.ShowText(transform.position, "enemy");
             CancelInvoke(nameof(WalkAround));
             InvokeRepeating(nameof(ShootZombie), initialShootDelay, repeatingShootDelay);
             foundZombie = true;
@@ -50,7 +51,8 @@ public class PoliceMove : HumanBase
         if (zombieShootingAt != null)
         {
             float lerpScale = 0.5f / Vector3.Distance(transform.position, zombieShootingAt.transform.position);
-            Vector3 bulletStartPosition = Vector3.Lerp(transform.position, zombieShootingAt.transform.position, lerpScale);
+            Vector3 bulletStartPosition =
+                Vector3.Lerp(transform.position, zombieShootingAt.transform.position, lerpScale);
             GameObject bullet = Instantiate(bulletPrefab, bulletStartPosition, Quaternion.identity);
             bullet.GetComponent<Bullet>().target = zombieShootingAt;
             bullet.GetComponent<Bullet>().originPolice = gameObject;

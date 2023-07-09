@@ -29,7 +29,7 @@ public class GameController : MonoBehaviour
         SpawnEntities();
         nuke.GetComponent<SpriteRenderer>().enabled = false;
         chatBubbleHandler = gameObject.GetComponent<ChatBubbleHandler>();
-        chatBubbleHandler.ShowText(new Vector3(3, 3), "");
+        // chatBubbleHandler.ShowText(new Vector3(3, 3), "");
     }
 
     IEnumerator WaitForMobToLoad(GameObject mob)

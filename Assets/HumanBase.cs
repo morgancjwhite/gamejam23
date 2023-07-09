@@ -99,11 +99,13 @@ public class HumanBase : MonoBehaviour
         }
 
         Instantiate(zombiePrefab, transform.position, Quaternion.identity);
-        Destroy(gameObject);
         for (int i = 0; i < bloodParticleNumber; i++)
         {
             Instantiate(bloodPrefab, transform.position, Quaternion.identity);
         }
+        ZombieAudio zombieAudio = _chatBubbleHandler.gameObject.GetComponentInChildren<ZombieAudio>();
+        zombieAudio.BiteNoise();
+        Destroy(gameObject);
     }
 
     void HandleCollision(Collision2D collision)
@@ -118,14 +120,13 @@ public class HumanBase : MonoBehaviour
             {
                 return;
             }
-
             rb.AddForce(normalAngle * bounceForce);
-            if (timeHitByZombie == 1)
+            if ((float)timeHitByZombie/ (float)hitsUntilDead < 0.6f)
             {
                 gameObject.GetComponent<SpriteRenderer>().sprite = woundedSprite1;
             }
 
-            if (timeHitByZombie == 2)
+            if ((float)timeHitByZombie/ (float)hitsUntilDead < 0.4f)
             {
                 gameObject.GetComponent<SpriteRenderer>().sprite = woundedSprite2;
             }

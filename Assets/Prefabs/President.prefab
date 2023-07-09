@@ -1,0 +1,102 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1001 &7338883088161607073
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 701544703915410095, guid: de601bb6e2fa8a1499931a06addcde99, type: 3}
+      propertyPath: maxSpeed
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 701544703915410095, guid: de601bb6e2fa8a1499931a06addcde99, type: 3}
+      propertyPath: initialShootDelay
+      value: 0.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 701544703915410095, guid: de601bb6e2fa8a1499931a06addcde99, type: 3}
+      propertyPath: bloodParticleNumber
+      value: 1000
+      objectReference: {fileID: 0}
+    - target: {fileID: 5719845038590406840, guid: de601bb6e2fa8a1499931a06addcde99, type: 3}
+      propertyPath: m_Name
+      value: President
+      objectReference: {fileID: 0}
+    - target: {fileID: 5719845038590406844, guid: de601bb6e2fa8a1499931a06addcde99, type: 3}
+      propertyPath: m_RootOrder
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5719845038590406844, guid: de601bb6e2fa8a1499931a06addcde99, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 31.45
+      objectReference: {fileID: 0}
+    - target: {fileID: 5719845038590406844, guid: de601bb6e2fa8a1499931a06addcde99, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 16.9
+      objectReference: {fileID: 0}
+    - target: {fileID: 5719845038590406844, guid: de601bb6e2fa8a1499931a06addcde99, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5719845038590406844, guid: de601bb6e2fa8a1499931a06addcde99, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5719845038590406844, guid: de601bb6e2fa8a1499931a06addcde99, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5719845038590406844, guid: de601bb6e2fa8a1499931a06addcde99, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5719845038590406844, guid: de601bb6e2fa8a1499931a06addcde99, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5719845038590406844, guid: de601bb6e2fa8a1499931a06addcde99, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5719845038590406844, guid: de601bb6e2fa8a1499931a06addcde99, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5719845038590406844, guid: de601bb6e2fa8a1499931a06addcde99, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: de601bb6e2fa8a1499931a06addcde99, type: 3}
+--- !u!1 &3078223028120239385 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5719845038590406840, guid: de601bb6e2fa8a1499931a06addcde99, type: 3}
+  m_PrefabInstance: {fileID: 7338883088161607073}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &4090106657798658771
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3078223028120239385}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: acfc5350ccd921841bfbdc84e3f8f83b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  zombiePrefab: {fileID: 5231579974589865235, guid: 37e9ac883f935cf41bc45f0bac6b8f07, type: 3}
+  bounceForce: 50
+  humanScanRadius: 15
+  humanWalkForce: 35
+  randomDirectionChangeTime: 5
+  maxSpeed: 10
+  bloodPrefab: {fileID: 519175455784229795, guid: b021efeafc7fa0646beccc798b481ec3, type: 3}
+  bloodParticleNumber: 1000
+  initialShootDelay: 0.3
+  repeatingShootDelay: 0.25
+  bulletPrefab: {fileID: 8239148300335702792, guid: 12d8835ea261e604d834ceef0263f5cd, type: 3}
+  hitsUntilDeadPolice: 10
+  woundedSprite1Police: {fileID: 0}
+  woundedSprite2Police: {fileID: 0}

@@ -97,6 +97,8 @@ MonoBehaviour:
   humanWalkForce: 35
   randomDirectionChangeTime: 5
   maxSpeed: 10
+  bloodPrefab: {fileID: 519175455784229795, guid: b021efeafc7fa0646beccc798b481ec3, type: 3}
+  bloodParticleNumber: 40
   initialShootDelay: 0.3
   repeatingShootDelay: 0.8
   bulletPrefab: {fileID: 8239148300335702792, guid: 12d8835ea261e604d834ceef0263f5cd, type: 3}

@@ -23,6 +23,8 @@ public class HumanBase : MonoBehaviour
     [NonSerialized] public Rigidbody2D rb;
     [NonSerialized] public bool spawnCollide;
     [NonSerialized] public bool updating;
+    public GameObject bloodPrefab;
+    public int bloodParticleNumber;
 
     [NonSerialized] public ChatBubbleHandler _chatBubbleHandler;
 
@@ -98,6 +100,10 @@ public class HumanBase : MonoBehaviour
 
         Instantiate(zombiePrefab, transform.position, Quaternion.identity);
         Destroy(gameObject);
+        for (int i = 0; i < bloodParticleNumber; i++)
+        {
+            Instantiate(bloodPrefab, transform.position, Quaternion.identity);
+        }
     }
 
     void HandleCollision(Collision2D collision)

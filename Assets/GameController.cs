@@ -43,7 +43,6 @@ public class GameController : MonoBehaviour
     IEnumerator DelayedChangeMusic(int seconds, AudioClip music)
     {
         yield return new WaitForSeconds(seconds);
-        print("should change music");
         _audioSource.loop = false;
         yield return new WaitUntil(() => !_audioSource.isPlaying);
         _audioSource.clip = music;
@@ -53,7 +52,6 @@ public class GameController : MonoBehaviour
 
     void ScheduleMusic()
     {
-        print("scheduling music");
         _audioSource.clip = musicLoop1;
         _audioSource.Play();
         int changeTime = (timeToNuke / 4) - 5;

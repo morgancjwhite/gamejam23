@@ -32,7 +32,6 @@ public class ChatBubbleHandler : MonoBehaviour
         "BUT WHAT ABOUT MY CRYPTO??",
         "HUH, FUNNY HOW THINGS WORK OUT",
         "HONEY? STOP! IT'S ME!",
-        "OH SHIT",
         "JUDGEMENT DAY HATH COMETH!",
         "MY SECRET DIES WITH ME",
         "MY LOVE? I KNEW YOU'D COME BACK!",
@@ -44,7 +43,6 @@ public class ChatBubbleHandler : MonoBehaviour
         "I'M ALL OUTTA GUM...",
         "I COUNT SIX BULLETS",
         "AIM FOR THE HEAD!",
-        "COME ON MOTHAFOCKAAA",
         "FOR KING AND COUNTRY!",
         "I'VE WAITED MY WHOLE LIFE FOR THIS",
         "YEEHAW!",
@@ -87,9 +85,18 @@ public class ChatBubbleHandler : MonoBehaviour
         "my back's... killing me..."
     };
 
+    private String[] presidentLines =
+    {
+        "I might not be the best president, but I will be the last",
+        "America! The land of the freaks",
+        "Anyone seen my secretary?",
+        "How're my approval ratings?",
+        "Goddamn Russians"
+    };
+
     private void Start()
     {
-        rnd = new System.Random(); 
+        rnd = new System.Random();
     }
 
     public void ShowText(Vector3 objectPos, string type)
@@ -109,6 +116,11 @@ public class ChatBubbleHandler : MonoBehaviour
         {
             int choice = rnd.Next(zombieLines.Length);
             text = zombieLines[choice];
+        }
+        else if (type == "president")
+        {
+            int choice = rnd.Next(presidentLines.Length);
+            text = presidentLines[choice];
         }
         else
         {

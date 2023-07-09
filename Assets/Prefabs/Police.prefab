@@ -8,9 +8,17 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 2841498550865765753, guid: b2372f13e140d204a970850858655788, type: 3}
+      propertyPath: m_Size.x
+      value: 0.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2841498550865765753, guid: b2372f13e140d204a970850858655788, type: 3}
+      propertyPath: m_Size.y
+      value: 0.31
+      objectReference: {fileID: 0}
+    - target: {fileID: 2841498550865765753, guid: b2372f13e140d204a970850858655788, type: 3}
       propertyPath: m_Sprite
       value: 
-      objectReference: {fileID: 21300000, guid: aaeb4c38193c324458e0f20f3be3f474, type: 3}
+      objectReference: {fileID: 21300000, guid: ee9d14d6f0b52fd4f821b81128638b60, type: 3}
     - target: {fileID: 2841498550865765754, guid: b2372f13e140d204a970850858655788, type: 3}
       propertyPath: m_RootOrder
       value: 0
@@ -93,5 +101,5 @@ MonoBehaviour:
   repeatingShootDelay: 0.8
   bulletPrefab: {fileID: 8239148300335702792, guid: 12d8835ea261e604d834ceef0263f5cd, type: 3}
   hitsUntilDeadPolice: 3
-  woundedSprite1Police: {fileID: 21300000, guid: 9fc1605df951d2140a5872d0fb06c6eb, type: 3}
-  woundedSprite2Police: {fileID: 21300000, guid: db86a9a4603358f48bfe5d61280af178, type: 3}
+  woundedSprite1Police: {fileID: 21300000, guid: 6dc28fa12ed72174ab1975aa089eac4e, type: 3}
+  woundedSprite2Police: {fileID: 21300000, guid: 6726472a68fe64748961b5f003efb99d, type: 3}

@@ -1,5 +1,6 @@
 using System;
 using System.Collections;
+using System.Security.Cryptography.X509Certificates;
 using TMPro;
 using UnityEngine;
 
@@ -55,8 +56,6 @@ public class GameController : MonoBehaviour
         _audioSource.clip = musicLoop1;
         _audioSource.Play();
         int changeTime = (timeToNuke / 4) - 5;
-        StartCoroutine(DelayedChangeMusic(changeTime, musicLoop2));
-        StartCoroutine(DelayedChangeMusic(changeTime * 2, musicLoop3));
         StartCoroutine(DelayedChangeMusic(changeTime * 3, musicLoop4));
     }
 
@@ -71,11 +70,11 @@ public class GameController : MonoBehaviour
 
     void SpawnHumanBaseMobs(GameObject prefab, int numMobs)
     {
+        // map is x ranges from -36 -> 46, y ranges from 26 -> -36
         for (int i = 1; i < numMobs; i++)
         {
-            // TODO want mobs to spawn outside of human spawn range
-            int rndX = rnd.Next(-mapSize, mapSize);
-            int rndY = rnd.Next(-mapSize, mapSize);
+            int rndX = rnd.Next(-36, 46);
+            int rndY = rnd.Next(-36, 26);
             GameObject mob = Instantiate(prefab, new Vector3(rndX, rndY, -1), Quaternion.identity);
             StartCoroutine(WaitForMobToLoad(mob));
         }
@@ -123,6 +122,15 @@ public class GameController : MonoBehaviour
         if (zombieCount == 0)
         {
             QuitGame();
+        }
+
+        if (zombieCount > 4)
+        {
+            StartCoroutine(DelayedChangeMusic(0, musicLoop2));
+        }
+        if (zombieCount > 10)
+        {
+            StartCoroutine(DelayedChangeMusic(0, musicLoop3));
         }
     }
 

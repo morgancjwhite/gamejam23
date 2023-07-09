@@ -204,7 +204,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'Time left: 2:00'
+  m_text: 'Time left: 1:30'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: c6bb37810f0d0d147ab08320f8fc81a8, type: 2}
   m_sharedMaterial: {fileID: 6436008238946030665, guid: c6bb37810f0d0d147ab08320f8fc81a8, type: 2}
@@ -56453,7 +56453,7 @@ MonoBehaviour:
   numPolice: 25
   nuke: {fileID: 888276907}
   mapSize: 50
-  timeToNuke: 120
+  timeToNuke: 90
   musicLoop1: {fileID: 8300000, guid: 3e526b23e2bf6864d858512ec927f89d, type: 3}
   musicLoop2: {fileID: 8300000, guid: a51ce6ac002a35a43a15a6ece69120b2, type: 3}
   musicLoop3: {fileID: 8300000, guid: 579530e22fa12dc42b8854d4bf838eff, type: 3}
@@ -56940,7 +56940,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1131769507}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: -10}
+  m_LocalPosition: {x: -17.5, y: -23, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:

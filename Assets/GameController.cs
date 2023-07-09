@@ -43,13 +43,13 @@ public class GameController : MonoBehaviour
         humanSpawnRangeHorizontal = 15;
         zombieCount = 0;
         _audioSource = gameObject.GetComponent<AudioSource>();
+        _audioSource.clip = musicLoop1;
+        _audioSource.Play();
         ScheduleMusic();
     }
 
     void StartGame()
     {
-        _audioSource.clip = musicLoop1;
-        _audioSource.Play();
         _timer.timerIsRunning = true;
         SpawnEntities();
         nuke.GetComponent<SpriteRenderer>().enabled = false;
@@ -126,7 +126,7 @@ public class GameController : MonoBehaviour
     void SpawnEntities()
     {
         SpawnPrez();
-        GameObject startZombie = Instantiate(zombiePrefab, new Vector3(0, 0, -1), Quaternion.identity);
+        GameObject startZombie = Instantiate(zombiePrefab, new Vector3(-17.5f, -23f, -1), Quaternion.identity);
         StartCoroutine(ZombieLoad());
         startZombie.GetComponent<ZombieMove>().speed = 1.5f;
         SpawnHumanBaseMobs(humanPrefab, numHumans);
@@ -158,9 +158,9 @@ public class GameController : MonoBehaviour
             StartGame();
         }
 
-        if (zombieIn  && zombieCount == 0)
+        if (zombieIn && zombieCount == 0)
         {
-            QuitGame();
+            StartCoroutine(DelayRestart(0.5f));
         }
 
         if (zombieCount > 4)
@@ -180,7 +180,7 @@ public class GameController : MonoBehaviour
         nuke.GetComponent<SpriteRenderer>().enabled = true;
         GameObject camera = GameObject.Find("Main Camera");
         nuke.transform.position = new Vector3(camera.transform.position.x, camera.transform.position.y, -8);
-        StartCoroutine(DelayQuit(20f));
+        StartCoroutine(DelayRestart(5f));
     }
 
     IEnumerator DelayQuit(float seconds)

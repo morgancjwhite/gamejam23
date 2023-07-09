@@ -54,7 +54,6 @@ public class ChatBubbleHandler : MonoBehaviour
         "GOD I LOOK SO COOL RIGHT NOW",
         "ANOTHER FOR THE TALLY",
         "AND SHE SAID THE MILITARY WAS A DUMB IDEA",
-        "WHAT AN UGLY PIECE OF SHIT"
     };
 
     private String[] zombieLines =

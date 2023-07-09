@@ -67,6 +67,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5719845038590406847, guid: de601bb6e2fa8a1499931a06addcde99, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: d1e15095be4605945a7d02be2c28eaf8, type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: de601bb6e2fa8a1499931a06addcde99, type: 3}
 --- !u!1 &3078223028120239385 stripped
@@ -98,5 +102,5 @@ MonoBehaviour:
   repeatingShootDelay: 0.25
   bulletPrefab: {fileID: 8239148300335702792, guid: 12d8835ea261e604d834ceef0263f5cd, type: 3}
   hitsUntilDeadPolice: 10
-  woundedSprite1Police: {fileID: 0}
-  woundedSprite2Police: {fileID: 0}
+  woundedSprite1Police: {fileID: 21300000, guid: a481978d9f38b004ab648b8ed9a45504, type: 3}
+  woundedSprite2Police: {fileID: 21300000, guid: 1c4a51be1e2b739489cb692f91d681d1, type: 3}

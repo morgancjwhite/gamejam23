@@ -16,10 +16,12 @@ public class ZombieAudio : MonoBehaviour
     private AudioClip[] groans;
     private AudioClip[] bites;
     public int sampleSize;
+    private GameController gameController;
 
 
     private void Start()
     {
+        gameController = GameObject.Find("GameController").GetComponent<GameController>();
         _audioSource = gameObject.GetComponent<AudioSource>();
         groans = new[]
             {
@@ -30,8 +32,6 @@ public class ZombieAudio : MonoBehaviour
             zombieBite1, zombieBite2
         };
         rnd = new System.Random();
-        
-        GroanNoise();
     }
 
     private AudioClip RandomZombieSound(string type)
@@ -76,7 +76,7 @@ public class ZombieAudio : MonoBehaviour
 
     private void Update()
     {
-        if (rnd.Next(sampleSize) == 0)
+        if (gameController.gameState == "running" && rnd.Next(sampleSize) == 0)
         {
             GroanNoise();
         }

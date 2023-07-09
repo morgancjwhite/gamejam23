@@ -27,11 +27,13 @@ public class HumanBase : MonoBehaviour
     public int bloodParticleNumber;
 
     [NonSerialized] public ChatBubbleHandler _chatBubbleHandler;
+    private bool isPrez;
 
 
     // Start is called before the first frame update
     public void Start()
     {
+        isPrez = false;
         rnd = new System.Random();
         cardinalDirections = new List<Vector2>();
         cardinalDirections.Add(new Vector2(1, 0));
@@ -45,6 +47,10 @@ public class HumanBase : MonoBehaviour
         rb.freezeRotation = true;
         updating = false;
         _chatBubbleHandler = GameObject.Find("GameController").GetComponent<ChatBubbleHandler>();
+        if (hitsUntilDead > 4)
+        {
+            isPrez = true;
+        }
     }
 
     void Update()
@@ -105,6 +111,10 @@ public class HumanBase : MonoBehaviour
         }
         ZombieAudio zombieAudio = _chatBubbleHandler.gameObject.GetComponentInChildren<ZombieAudio>();
         zombieAudio.BiteNoise();
+        if (isPrez)
+        {
+            _chatBubbleHandler.gameObject.GetComponent<GameController>().Win();
+        }
         Destroy(gameObject);
     }
 
@@ -123,12 +133,12 @@ public class HumanBase : MonoBehaviour
             rb.AddForce(normalAngle * bounceForce);
             if ((float)timeHitByZombie/ (float)hitsUntilDead < 0.6f)
             {
-                gameObject.GetComponent<SpriteRenderer>().sprite = woundedSprite1;
+                gameObject.GetComponent<SpriteRenderer>().sprite = woundedSprite2;
             }
 
             if ((float)timeHitByZombie/ (float)hitsUntilDead < 0.4f)
             {
-                gameObject.GetComponent<SpriteRenderer>().sprite = woundedSprite2;
+                gameObject.GetComponent<SpriteRenderer>().sprite = woundedSprite1;
             }
 
             if (timeHitByZombie >= hitsUntilDead)

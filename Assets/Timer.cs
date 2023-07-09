@@ -6,14 +6,14 @@ public class Timer : MonoBehaviour
     public bool timerIsRunning;
     private TextMeshProUGUI textComponent;
     private GameController gameController;
-    private float timeToNuke;
+    public float timeToNuke;
 
     private void Start()
     {
         textComponent = gameObject.GetComponent<TextMeshProUGUI>();
         gameController = GameObject.Find("GameController").GetComponent<GameController>();
         // Starts the timer automatically
-        timerIsRunning = true;
+        timerIsRunning = false;
         timeToNuke = gameController.timeToNuke;
     }
 
@@ -31,7 +31,7 @@ public class Timer : MonoBehaviour
                 print("Time has run out!");
                 timeToNuke = 0;
                 timerIsRunning = false;
-                gameController.Nuke();
+                gameController.Lose();
             }
         }
     }

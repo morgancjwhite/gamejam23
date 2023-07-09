@@ -1,5 +1,6 @@
 using System;
 using System.Collections;
+using TMPro;
 using UnityEngine;
 
 public class GameController : MonoBehaviour
@@ -19,6 +20,11 @@ public class GameController : MonoBehaviour
     public int timeToNuke;
     [NonSerialized] public ChatBubbleHandler chatBubbleHandler;
 
+    [SerializeField] private AudioClip musicLoop1;
+    [SerializeField] private AudioClip musicLoop2;
+    [SerializeField] private AudioClip musicLoop3;
+    [SerializeField] private AudioClip musicLoop4;
+    private AudioSource _audioSource;
 
     void Start()
     {
@@ -30,6 +36,30 @@ public class GameController : MonoBehaviour
         nuke.GetComponent<SpriteRenderer>().enabled = false;
         chatBubbleHandler = gameObject.GetComponent<ChatBubbleHandler>();
         // chatBubbleHandler.ShowText(new Vector3(3, 3), "");
+        _audioSource = gameObject.GetComponent<AudioSource>();
+        ScheduleMusic();
+    }
+
+    IEnumerator DelayedChangeMusic(int seconds, AudioClip music)
+    {
+        yield return new WaitForSeconds(seconds);
+        print("should change music");
+        _audioSource.loop = false;
+        yield return new WaitUntil(() => !_audioSource.isPlaying);
+        _audioSource.clip = music;
+        _audioSource.loop = true;
+        _audioSource.Play();
+    }
+
+    void ScheduleMusic()
+    {
+        print("scheduling music");
+        _audioSource.clip = musicLoop1;
+        _audioSource.Play();
+        int changeTime = (timeToNuke / 4) - 5;
+        StartCoroutine(DelayedChangeMusic(changeTime, musicLoop2));
+        StartCoroutine(DelayedChangeMusic(changeTime * 2, musicLoop3));
+        StartCoroutine(DelayedChangeMusic(changeTime * 3, musicLoop4));
     }
 
     IEnumerator WaitForMobToLoad(GameObject mob)
@@ -100,9 +130,7 @@ public class GameController : MonoBehaviour
 
     IEnumerator DelayQuit(float seconds)
     {
-        print("start delay, see nuke?");
         yield return new WaitForSeconds(seconds);
-        print("delay finished");
         QuitGame();
     }
 
